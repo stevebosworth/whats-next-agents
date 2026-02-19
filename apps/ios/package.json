@@ -1,0 +1,33 @@
+{
+  "name": "@apps/ios",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "start": "react-native start",
+    "test": "jest",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "react": "latest",
+    "react-native": "latest",
+    "@packages/core": "*",
+    "@packages/ui": "*",
+    "luxon": "latest",
+    "chrono-node": "latest",
+    "@nozbe/watermelondb": "latest",
+    "@nozbe/with-observables": "latest"
+  },
+  "devDependencies": {
+    "@babel/core": "latest",
+    "@babel/runtime": "latest",
+    "@react-native/eslint-config": "latest",
+    "@react-native/metro-config": "latest",
+    "@react-native/typescript-config": "latest",
+    "babel-jest": "latest",
+    "eslint": "latest",
+    "jest": "latest",
+    "react-test-renderer": "latest",
+    "typescript": "latest"
+  }
+}

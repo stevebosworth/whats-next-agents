@@ -1,0 +1,22 @@
+{
+  "name": "whats-next-agents",
+  "version": "1.0.0",
+  "description": "Next-Gen Todo App with Hybrid Logical Clocks and Local-First NLP",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "test": "turbo run test"
+  },
+  "devDependencies": {
+    "turbo": "latest",
+    "prettier": "latest"
+  }
+}

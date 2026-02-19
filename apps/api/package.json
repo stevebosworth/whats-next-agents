@@ -1,0 +1,36 @@
+{
+  "name": "@apps/api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "drizzle-orm": "latest",
+    "pg": "latest",
+    "postgres": "latest",
+    "zod": "latest",
+    "next-auth": "latest",
+    "luxon": "latest",
+    "chrono-node": "latest",
+    "@packages/core": "*"
+  },
+  "devDependencies": {
+    "typescript": "latest",
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "drizzle-kit": "latest",
+    "vitest": "latest",
+    "eslint": "latest",
+    "eslint-config-next": "latest"
+  }
+}

@@ -1,0 +1,46 @@
+# Implementation Plan: Next-Gen Todo App (Coder) - Revised
+
+This document outlines the step-by-step technical execution plan based on the `requirements.md`, incorporating feedback from the Architect and Product Manager.
+
+## Phase 1: Foundation & Scaffolding
+1. **Monorepo Setup:** Initialize a Turborepo workspace.
+2. **Workspace Interlinking:** Ensure `@packages/core`, `@packages/ui`, and `@packages/config` are correctly linked and accessible to all apps.
+3. **Package Configuration:** 
+   - Setup `@packages/config` with shared ESLint, Prettier, and TypeScript configs.
+   - Setup `@packages/core` for shared logic, Zod schemas, and `Luxon` configurations.
+   - Setup `@packages/ui` as a React Native Web-compatible component library using theme tokens.
+4. **App Scaffolding:**
+   - `/apps/api`: Initialize a Next.js App Router project (TypeScript).
+   - `/apps/web`: Initialize a React app using Vite (TypeScript).
+   - `/apps/ios`: Initialize a React Native app (TypeScript).
+
+## Phase 2: Core Logic (@packages/core)
+1. **Schema Definition:** Define canonical `Task` and `User` Zod schemas.
+2. **Time & NLP Logic:** 
+   - Integrate `Luxon` for time-zone math (Floating vs. Fixed).
+   - Integrate `chrono-node` for local NLP duration and date extraction.
+3. **HLC Sync Logic:** Implement Hybrid Logical Clocks for event ordering and conflict resolution.
+4. **Property-Based Testing:** Use `fast-check` to stress-test HLC resolution and the "Time-Fitting" algorithm.
+
+## Phase 3: Backend API (@apps/api)
+1. **Database & ORM:** Setup PostgreSQL with Drizzle ORM; derive database schemas from `@packages/core` Zod models.
+2. **Authentication:** Implement JWT with Refresh Token strategy (NextAuth.js or custom logic).
+3. **Endpoints:** 
+   - Sync endpoint for HLC reconciliation and delta-updates.
+   - Task CRUD and Bulk Update routes.
+4. **Authorization:** Implement middleware for scoped user data access.
+
+## Phase 4: Frontend Development (@apps/web & @apps/ios)
+1. **Theme Setup:** Initialize the design system tokens in `@packages/ui`.
+2. **Data Persistence:**
+   - Integrate WatermelonDB in `ios`.
+   - Setup a local-first persistence layer for `web` (e.g., RxDB or indexedDB-based).
+3. **UI Implementation:** 
+   - Instant NLP Capture input using client-side extraction.
+   - **Assistant Mode (Time-Fitting):** Implement the suggestion UI for schedule gaps.
+4. **Native Integration:** Implement Native BackgroundTasks API on iOS for background sync.
+
+## Phase 5: Testing & Quality
+1. **Unit/Integration:** Vitest for API and Core logic.
+2. **Mobile Testing:** Jest and Maestro for React Native.
+3. **Data Integrity:** Validation tests for HLC drift and time-zone transitions.
