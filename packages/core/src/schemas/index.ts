@@ -15,7 +15,7 @@ export const TaskSchema = z.object({
   due_at: z.string().datetime().nullable().optional(),
   timezone_mode: TimezoneModeSchema.default('floating'),
   timezone: z.string().default('UTC'),
-  hlc_timestamp: z.string(), // e.g., "2026-02-19T12:00:00.000Z:0001:node-id"
+  hlc_timestamp: z.string(), // e.g., "001740000000000_0000001_node-id"
   created_at: z.string().datetime(),
   updated_at: z.string().datetime(),
   deleted_at: z.string().datetime().nullable().optional(),

@@ -31,7 +31,7 @@ export class HLC {
   }
 
   static toString(t: HLCTimestamp): string {
-    return `${t.wallTime.toString().padStart(15, '0')}_${t.counter.toString().padStart(5, '0')}_${t.nodeId}`
+    return `${t.wallTime.toString().padStart(15, '0')}_${t.counter.toString().padStart(7, '0')}_${t.nodeId}`
   }
 
   tick(): string {

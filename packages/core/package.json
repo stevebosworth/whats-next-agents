@@ -17,13 +17,14 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "zod": "latest",
-    "luxon": "latest",
     "chrono-node": "latest",
-    "fast-check": "latest"
+    "fast-check": "latest",
+    "luxon": "latest",
+    "zod": "latest"
   },
   "devDependencies": {
-    "vitest": "latest",
-    "typescript": "latest"
+    "@vitest/coverage-v8": "^4.0.18",
+    "typescript": "latest",
+    "vitest": "latest"
   }
 }
