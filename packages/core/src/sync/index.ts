@@ -4,6 +4,11 @@ export interface HLCTimestamp {
   nodeId: string
 }
 
+/**
+ * Hybrid Logical Clock (HLC) implementation.
+ * Formatted as: <wallTime_ms>_<counter>_<nodeId>
+ * Example: 1740000000000_0001_node-1
+ */
 export class HLC {
   private lastWallTime: number = 0
   private lastCounter: number = 0
@@ -14,19 +19,19 @@ export class HLC {
   }
 
   static fromString(s: string): HLCTimestamp {
-    const parts = s.split(':')
+    const parts = s.split('_')
     if (parts.length !== 3) {
       throw new Error(`Invalid HLC timestamp: ${s}`)
     }
     return {
-      wallTime: new Date(parts[0]).getTime(),
+      wallTime: parseInt(parts[0], 10),
       counter: parseInt(parts[1], 10),
       nodeId: parts[2],
     }
   }
 
   static toString(t: HLCTimestamp): string {
-    return `${new Date(t.wallTime).toISOString()}:${t.counter.toString().padStart(4, '0')}:${t.nodeId}`
+    return `${t.wallTime.toString().padStart(15, '0')}_${t.counter.toString().padStart(5, '0')}_${t.nodeId}`
   }
 
   tick(): string {
@@ -49,17 +54,19 @@ export class HLC {
     const remote = HLC.fromString(remoteTimestamp)
     const localNow = Date.now()
 
-    this.lastWallTime = Math.max(this.lastWallTime, remote.wallTime, localNow)
+    const nextWallTime = Math.max(this.lastWallTime, remote.wallTime, localNow)
 
-    if (this.lastWallTime === remote.wallTime && this.lastWallTime === localNow) {
+    if (nextWallTime === this.lastWallTime && nextWallTime === remote.wallTime) {
       this.lastCounter = Math.max(this.lastCounter, remote.counter) + 1
-    } else if (this.lastWallTime === remote.wallTime) {
-      this.lastCounter = remote.counter + 1
-    } else if (this.lastWallTime === localNow) {
+    } else if (nextWallTime === this.lastWallTime) {
       this.lastCounter = this.lastCounter + 1
+    } else if (nextWallTime === remote.wallTime) {
+      this.lastCounter = remote.counter + 1
     } else {
       this.lastCounter = 0
     }
+
+    this.lastWallTime = nextWallTime
 
     return HLC.toString({
       wallTime: this.lastWallTime,
@@ -70,11 +77,7 @@ export class HLC {
 
   static compare(t1: string, t2: string): number {
     if (t1 === t2) return 0
-    const [w1, c1, n1] = t1.split(':')
-    const [w2, c2, n2] = t2.split(':')
-
-    if (w1 !== w2) return w1 < w2 ? -1 : 1
-    if (c1 !== c2) return c1 < c2 ? -1 : 1
-    return n1 < n2 ? -1 : 1
+    return t1 < t2 ? -1 : 1
   }
 }
+

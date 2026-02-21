@@ -29,9 +29,15 @@ export const parseDuration = (input: string): { title: string; duration: number 
 
 export const parseTaskString = (input: string, userTimezone: string = 'UTC'): ParsedTask => {
   const { title: titleAfterDuration, duration } = parseDuration(input)
+  
+  // Set reference date in user's timezone
+  const referenceDate = DateTime.now().setZone(userTimezone).toJSDate()
+  
   const results = chrono.parse(titleAfterDuration, {
-    forwardDate: true,
+    instant: referenceDate,
     timezone: userTimezone,
+  }, {
+    forwardDate: true,
   })
 
   let title = titleAfterDuration
@@ -41,11 +47,15 @@ export const parseTaskString = (input: string, userTimezone: string = 'UTC'): Pa
     const lastResult = results[results.length - 1]
     const date = lastResult.start.date()
     
-    // We only take the date if it's explicitly mentioned
     due_at = DateTime.fromJSDate(date).setZone(userTimezone).toISO()
     
     // Remove the date string from the title
     title = titleAfterDuration.replace(lastResult.text, '').trim().replace(/\s+/g, ' ')
+  }
+
+  // Ensure title is not empty to satisfy Zod schema validation
+  if (!title || title.trim() === '') {
+    title = titleAfterDuration.trim() || 'Untitled Task'
   }
 
   return {
@@ -55,3 +65,4 @@ export const parseTaskString = (input: string, userTimezone: string = 'UTC'): Pa
     timezone: userTimezone,
   }
 }
+
