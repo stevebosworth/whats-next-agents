@@ -16,7 +16,27 @@
     "test": "turbo run test"
   },
   "devDependencies": {
-    "turbo": "latest",
-    "prettier": "latest"
+    "@tailwindcss/postcss": "^4.2.0",
+    "@tailwindcss/vite": "^4.2.0",
+    "@types/node": "^25.3.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "drizzle-kit": "^0.31.9",
+    "eslint": "^9.39.3",
+    "fast-check": "^4.5.3",
+    "prettier": "^3.8.1",
+    "turbo": "^2.8.10",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18"
+  },
+  "dependencies": {
+    "chrono-node": "^2.9.0",
+    "drizzle-orm": "^0.45.1",
+    "luxon": "^3.7.2",
+    "next-auth": "^4.24.13",
+    "pg": "^8.18.0",
+    "postgres": "^3.4.8",
+    "react-native-web": "^0.21.2",
+    "zod": "^4.3.6"
   }
 }
