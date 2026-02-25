@@ -33,12 +33,12 @@ This document outlines the step-by-step technical execution plan based on the `r
 ## Phase 4: Frontend Development (@apps/web & @apps/ios) [IN PROGRESS]
 1. **Theme Setup:** Initialize the design system tokens in `@packages/ui`. [DONE]
 2. **Data Persistence:**
-   - Integrate WatermelonDB in `ios`.
-   - Setup a local-first persistence layer for `web` (e.g., RxDB or indexedDB-based).
+   - Integrate WatermelonDB in `ios`. [DONE]
+   - Setup a local-first persistence layer for `web` (e.g., RxDB or indexedDB-based). [DONE]
 3. **UI Implementation:** 
-   - Instant NLP Capture input using client-side extraction.
-   - **Assistant Mode (Time-Fitting):** Implement the suggestion UI for schedule gaps.
-4. **Native Integration:** Implement Native BackgroundTasks API on iOS for background sync.
+   - Instant NLP Capture input using client-side extraction. [DONE]
+   - **Assistant Mode (Time-Fitting):** Implement the suggestion UI for schedule gaps. [DONE]
+4. **Native Integration:** Implement Native BackgroundTasks API on iOS for background sync. [TODO]
 
 ## Phase 4.1: Web App Diagnostics
 **Investigation Summary:**
@@ -64,8 +64,8 @@ The server reports as "Ready" on `http://localhost:3001`, but connectivity issue
 3. **Data Integrity:** Validation tests for HLC drift and time-zone transitions.
 
 ## Next Steps / TODO
-- [ ] **Web App implementation:** Set up TanStack Query and local-first persistence in `apps/web`.
-- [ ] **iOS App implementation:** Integrate WatermelonDB and connect to `@packages/ui`.
+- [x] **Web App implementation:** Set up TanStack Query and local-first persistence in `apps/web`.
+- [x] **iOS App implementation:** Integrate WatermelonDB and connect to `@packages/ui`.
 - [ ] **Local-First Sync:** Implement the client-side HLC sync reconciliation in `@packages/core`.
-- [ ] **Assistant UI:** Build the "I have X minutes" suggestion view in both Web and iOS.
+- [ ] **Assistant UI:** Build the "I have X minutes" suggestion view in both Web and iOS. [DONE]
 - [ ] **Production Auth:** Replace the mocked session logic in `apps/api` with full NextAuth.js or JWT flows.
