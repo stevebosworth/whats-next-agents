@@ -10,27 +10,26 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
   "dependencies": {
-    "react": "latest",
-    "react-dom": "latest",
     "@packages/core": "*",
     "@packages/ui": "*",
-    "luxon": "latest",
     "chrono-node": "latest",
-    "lucide-react": "latest",
     "clsx": "latest",
+    "lucide-react": "latest",
+    "luxon": "latest",
+    "react": "latest",
+    "react-dom": "latest",
     "tailwind-merge": "latest"
   },
   "devDependencies": {
-    "vite": "latest",
-    "@vitejs/plugin-react": "latest",
-    "typescript": "latest",
+    "@tailwindcss/vite": "^4.2.0",
     "@types/react": "latest",
     "@types/react-dom": "latest",
-    "autoprefixer": "latest",
-    "postcss": "latest",
-    "tailwindcss": "latest",
+    "@vitejs/plugin-react": "latest",
     "eslint": "latest",
     "eslint-plugin-react-hooks": "latest",
-    "eslint-plugin-react-refresh": "latest"
+    "eslint-plugin-react-refresh": "latest",
+    "tailwindcss": "^4.2.0",
+    "typescript": "latest",
+    "vite": "latest"
   }
 }
